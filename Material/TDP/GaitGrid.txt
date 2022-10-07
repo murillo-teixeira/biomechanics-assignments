@@ -1,0 +1,78 @@
+PARAMETER DESCRIPTION	Total/Left	Right
+Step Count	19	 
+Distance	1252,15	 
+Ambulation Time	9,62	 
+Velocity	130,2	 
+Cadence	118,5	 
+Normalized Velocity  	,	 
+Step Time Differential	0,005	 
+Step Length Differential	0,457	 
+Cycle Time Differential	0,008	 
+Functional Amb. Profile	,	 
+Leg Length(cm)	,	,
+Step Time(sec)	0,503	0,508
+Step Length(cm)	65,662	66,119
+Step Extremity(ratio)	,	,
+Cycle Time(sec)	1,018	1,01
+Stride Length(cm)	131,966	132,096
+HH Base Support(cm)	13,883	13,629
+Swing Time(sec)	0,427	0,425
+Stance Time(sec) 	0,591	0,586
+Single Supp. Time(sec)	0,425	0,427
+Double Supp. Time(sec)	0,16	0,162
+Swing % of Cycle	41,9	42,1
+Stance % of Cycle	58,1	58
+Single Supp % Cycle	41,7	42,3
+Double Supp % Cycle	15,7	16
+Toe In / Out	6	4,6
+HeelOffOn Time	0,229	0,238
+HeelOffOn Perc	22,5	23,6
+Double Supp Load Time	0,083	0,081
+Double Supp Load %GC	8,2	8
+Double Supp Unload Time	0,077	0,08
+Double Supp Unload %GC	7,6	7,9
+Stride Velocity	129,831	130,947
+Step Len Std Dev	1,848	2,51
+Step Time Std Dev	0,021	0,015
+Stride Length Std Dev	3,139	4,128
+Stride Time Std Dev	0,034	0,035
+Swing Time Std Dev	0,013	0,015
+Stance Time Std Dev	0,024	0,023
+Stride Velocity Std Dev	6,674	7,103
+Single Supp Time Std Dev	0,015	0,013
+Double Supp Time Std Dev	0,018	0,014
+Heel Off On Std Dev	0,024	0,014
+Supp Base On Std Dev	1,628	2,565
+Foot Length	23	22,5
+Foot Width	7,18	7,313
+Standardize Amb Ti	,	,
+Trigger 1 First (0/1)	,	,
+Trigger 2 First (0/1)	,	,
+Trigger 1 Last (0/1)	,	,
+Trigger 2 Last (0/1)	,	,
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+ 		
+ 		
+ 		
+Temporal Data for Id # 101 Test # 1		
+Pt Id: 		
+Patient Name: 20222023 t1, BM 		
+Test Date: Test # 1		
+Research Ref: 		
+Comment: 		
