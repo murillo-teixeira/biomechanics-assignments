@@ -26,14 +26,23 @@ for i = 1 : NBody
     Body(i).pj   = H(Nline, 2);
     Body(i).PCoM = H(Nline, 3);
 end
+%... Store information for Revolute Joints 
+for k = 1 : Jnt.NRevolute 
+    Nline = Nline + 1; 
+    Jnt.Revolute(k).i = H(Nline, 1); 
+    Jnt.Revolute(k).j = H(Nline, 2); 
+    Jnt.Revolute(k).spi = H(Nline, 3:4)'; 
+    Jnt.Revolute(k).spj = H(Nline, 5:6)';
+end 
 
 % ... Store information for Revolute Joints
-for k = 1 : Jnt.NRevolute
+for k = 1 : Jnt.NDriver
     Nline                   = Nline + 1;
     Jnt.Driver(k).type      = H(Nline, 1);
     Jnt.Driver(k).i         = H(Nline, 2);
     Jnt.Driver(k).coortype  = H(Nline, 3);
     Jnt.Driver(k).j         = H(Nline, 4);
+    disp(Jnt.Driver(k).type)
     if(Jnt.Driver(k).type ~= 3 && ...
             Jnt.Driver(k).type ~= 4 && ...
             Jnt.Driver(k).type ~= 5)

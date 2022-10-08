@@ -1,12 +1,17 @@
 clear;clc;
 % Pre-processing of data from the Laboratory of Biomechanics of Lisbon
 
+global NBody Body Jnt Pts LabData
+
 % Reads input data for the biomechanical model
 ReadInput('ProcessingFile.txt');
 
 % Reads the static data
 StaticData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0001_static.tsv');
 
+plot_2d_data(StaticData, Body)
+
+%% 
 % Compute the average segment lengths
 ComputeAverageLengths(StaticData);
 

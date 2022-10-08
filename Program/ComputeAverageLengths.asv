@@ -1,0 +1,22 @@
+function [outputArg1,outputArg2] = ComputeAverageLengths(inputArg1,inputArg2)
+
+
+% Organizes the data according to the definition of the biomechanical model % Notice that the coordinates from the lab are organized as follows: % 1 - Head; % 2 - L_Shoulder; % 3 - L_Elbow; % 4 - L_Wrist; % 5 - R_Shoulder % 6 - R_Elbow; % 7 - R_Wrist; % 8 - L_Hip; % 9 - L_Knee; % 10 - L_Ankle; % 11 - L_Heel; % 12 - L_Meta_V; is 13 - L_Toe_II; % 14 - R_Hip; % 15 - R_Knee % 16 - R_Ankle; % 17 - RHeel; % 18 - R_Meta_V; % 19 - R_Toe_II
+LabData.Coordinates = [FilteredCoordinates(:,1:2),... % Head 
+                      (FilteredCoordinates(:,3:4) + FilteredCoordinates(:,9:10)) / 2,... % Midpoint between shoulders 
+                    FilteredCoordinates(:,11:12),... % Right elbow 
+                    FilteredCoordinates(:,13:14), ...
+                    FilteredCoordinates(:,5:6),... 
+                    FilteredCoordinates(:,7:8),...
+                    (FilteredCoordinates(:, 15:16) + FilteredCoordinates(:,27:28)) / 2,
+                    FilteredCoordinates(:,29:30), 
+                    FilteredCoordinates(:,31:32), 
+                    FilteredCoordinates(:,35:36), 
+                    FilteredCoordinates(:,37:38), 
+                    FilteredCoordinates(:,17:18), 
+                    FilteredCoordinates(:,19:20), 
+                    FilteredCoordinates(:,23:24), FilteredCoordinates(:,25:26)] 
+
+
+end
+

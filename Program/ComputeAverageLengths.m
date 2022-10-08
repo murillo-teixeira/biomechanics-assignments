@@ -1,7 +1,31 @@
-function [outputArg1,outputArg2] = ComputeAverageLengths(inputArg1,inputArg2)
-%COMPUTEAVERAGELENGTHS Summary of this function goes here
-%   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+function ComputeAverageLengths(inputArg1,inputArg2)
+    % Number of frames to evaluate 
+    NFrames = size(LabData.Coordinates, 1); 
+    
+    for i = 1 : NBody 
+    
+	    % Allocates memory for the lengths 
+	    SegmentLength = zeros(NFrames, 1); 
+    
+	    % Goes through all frames 
+	    for j = 1 : NFrames 
+	    
+	    % Position of the coordinates of points Pi and Pj
+	    Pi = 2 * (Body(i).pi - 1) + 1; 
+	    Pj = 2 * (Body(i).pj - 1) + 1; 
+	    
+	    % Computes the length for the current frame 
+	    SegmentLength(j) = norm(LabData.Coordinates(j, Pi : Pi + 1) -... 
+		    LabData.Coordinates(j, Pj : Pj + 1)); 
+    
+	    % End of the loop that goes through all frames
+     end 
+    
+    % Defines the average length 
+    Body(1).Length = mean(SegmentLength); 
+    
+    % End of the loop that goes through all bodies 
+    end 
+
 end
 
