@@ -1,4 +1,4 @@
-function plot_body(row, connections)
+function plot_3d_body(row, connections)
 
     positions = [];
     plot3(1, 1, 1);
