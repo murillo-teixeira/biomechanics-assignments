@@ -16,7 +16,7 @@ plot_2d_data(StaticData, Body)
 ComputeAverageLengths(StaticData);
 
 % Reads the gait data
-GaitData = ReadProcessData('../Material/TDP/GaitGrid.txt');
+GaitData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0010_Run.tsv');
 
 % computes the positions and angles of the body
 EvaluatePositions(GaitData);

@@ -1,15 +1,15 @@
 function LabData = ReadProcessData(FileName)
 
-global NBody
+global NBody;
 
 motion_data = table2array(readtable(FileName, 'FileType','text', 'VariableNamingRule','preserve'));
 time                = motion_data(:, 2);
-FrequencyInterval   = (0.5:0.01:6.0).';
+FrequencyInterval   = (0.5:0.01:10.0).';
 
 header_info = readcell(FileName, ...
     'FileType','text', ...
     'Delimiter','\t', ...
-    'ExpectedNumVariables',2)
+    'ExpectedNumVariables',2);
 
 %% Loading general info
 no_frames   = cell2mat(header_info(1, 2));
@@ -23,7 +23,7 @@ j = 1;
 
 while i < NBody * 3
     CutOffFrequencies(j) = get_cutoff_frequency(motion_data(:, i + 3), FrequencyInterval, f);
-    wn = (2 * CutOffFrequency) / f;
+    wn = (2 * CutOffFrequencies(j)) / f;
     [Ab, Bb] = butter(2, wn, 'low');
     FilteredCoordinates(:, j) = filtfilt(Ab, Bb, motion_data(:, i + 3));
     if rem(i, 2) == 0
@@ -39,9 +39,9 @@ end
 LabData.Coordinates = [FilteredCoordinates(:,1:2), ... % Head 
                        (FilteredCoordinates(:,3:4) + FilteredCoordinates(:,9:10)) / 2,... % Midpoint between shoulders 
                        FilteredCoordinates(:,11:12),... % Right elbow 
-                       FilteredCoordinates(:,13:14), ...
-                       FilteredCoordinates(:,5:6),... 
-                       FilteredCoordinates(:,7:8),...
+                       FilteredCoordinates(:,13:14), ... % Right wrist
+                       FilteredCoordinates(:,5:6),...   % Left elbow
+                       FilteredCoordinates(:,7:8),...   % 
                        (FilteredCoordinates(:, 15:16) + FilteredCoordinates(:,27:28)) / 2, ...
                        FilteredCoordinates(:,29:30), ...
                        FilteredCoordinates(:,31:32), ...
