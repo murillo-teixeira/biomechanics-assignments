@@ -11,10 +11,7 @@ for n=1:length(GaitData.Coordinates(:,1))
             LabData.Coordinates(n,2*(Body(i).pi)) - LabData.Coordinates(n,2*(Body(i).pj))^2)));
         
         % eta
-        Position(n, i+2:i+3) = [-Position(n,i+1), Position(n, i)];
-
-        % theta
-        Position(n, i+4) = 360 - atan2(norm(cross(Position(n,i:i+1), [1,0], 2)), dot(Position(n,i:i+1), [1,0]));
+        Position(n, i+2:i+3) = [-Position(i+1), P]
     end
 end
 %head_csi = (GaitData(2) - GaitData(1))/(sqrt((GaitData(2) - GaitData(1))'*(GaitData(2)-GaitData(1))));
