@@ -1,9 +1,8 @@
-function plot_2d_data(LabData, Body, name)
+function plot_2d_data(LabData, Body)
     global NBody
     N = length(LabData.Coordinates(:,1));
     for n = 1:N
         plot(0, 0)
-        
         grid on;
         hold on;
         for i = 1:2:(NBody*2 + 1)
@@ -17,20 +16,10 @@ function plot_2d_data(LabData, Body, name)
         ylim([0, 1.8])
         xlim([-2, 2])
         title('Running analysis', 'Interpreter', 'latex')
-        xlabel('Position (m)', 'Interpreter', 'latex')
-        ylabel('Position of markers (m)', 'Interpreter', 'latex')
+        xlabel('Position (m)')
+        ylabel('Ma')
         pause(0.01)
         hold off;
-        frame = getframe(gcf);
-        im = frame2im(frame);
-        [imind,cm] = rgb2ind(im,256);
-        if n == 1
-            imwrite(imind,cm,['images\', name, '3d.gif'],'gif', 'Loopcount',inf,...
-            'DelayTime',0.1);
-        else
-            imwrite(imind,cm,['images\', name, '3d.gif'],'gif','WriteMode','append',...
-            'DelayTime',0.1);
-        end
     end
 end
 

@@ -42,7 +42,6 @@ for k = 1 : Jnt.NDriver
     Jnt.Driver(k).i         = H(Nline, 2);
     Jnt.Driver(k).coortype  = H(Nline, 3);
     Jnt.Driver(k).j         = H(Nline, 4);
-    disp(Jnt.Driver(k).type)
     if(Jnt.Driver(k).type ~= 3 && ...
             Jnt.Driver(k).type ~= 4 && ...
             Jnt.Driver(k).type ~= 5)

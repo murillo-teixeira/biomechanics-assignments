@@ -1,10 +1,11 @@
-function LabData = ReadProcessData(FileName)
+function [LabData, FilteredCoordinates] = ReadProcessData(FileName)
 
 global NBody;
 
 motion_data = table2array(readtable(FileName, 'FileType','text', 'VariableNamingRule','preserve'));
 time                = motion_data(:, 2);
-FrequencyInterval   = (0.5:0.01:10.0).';
+% Comentar com o professor o gráfico de frequências de corte
+FrequencyInterval   = (0.1:0.01:6.5).';
 
 header_info = readcell(FileName, ...
     'FileType','text', ...
@@ -16,16 +17,30 @@ no_frames   = cell2mat(header_info(1, 2));
 no_cameras  = cell2mat(header_info(2, 2));
 no_markers  = cell2mat(header_info(3, 2));
 f           = cell2mat(header_info(4, 2));
-FilteredCoordinates = zeros(length(motion_data(:, 1)), NBody * 3);
+FilteredCoordinates = zeros(length(motion_data(:, 1)), NBody * 2);
 CutOffFrequencies   = zeros(NBody * 3);
 i = 1;
 j = 1;
 
-while i < NBody * 3
-    CutOffFrequencies(j) = get_cutoff_frequency(motion_data(:, i + 3), FrequencyInterval, f);
+for i = 1:19
+    if rem(i, 2) == 0
+        i = i + 2;
+    else
+    CutOffFrequencies(j) = get_cutoff_frequency(motion_data(:, i + 3), FrequencyInterval, f, i);
     wn = (2 * CutOffFrequencies(j)) / f;
     [Ab, Bb] = butter(2, wn, 'low');
     FilteredCoordinates(:, j) = filtfilt(Ab, Bb, motion_data(:, i + 3));
+
+    CutOffFrequencies(j) = get_cutoff_frequency(motion_data(:, i + 3), FrequencyInterval, f, i);
+    wn = (2 * CutOffFrequencies(j)) / f;
+    [Ab, Bb] = butter(2, wn, 'low');
+    FilteredCoordinates(:, j) = filtfilt(Ab, Bb, motion_data(:, i + 3));
+%     figure(i + 3)
+%     subplot(2, 1, 1);
+%     plot(motion_data(:, i + 3))
+%     subplot(2, 1, 2);
+%     plot(FilteredCoordinates(:, j))
+    
     if rem(i, 2) == 0
         i = i + 2;
     else
@@ -41,15 +56,15 @@ LabData.Coordinates = [FilteredCoordinates(:,1:2), ... % Head
                        FilteredCoordinates(:,11:12),... % Right elbow 
                        FilteredCoordinates(:,13:14), ... % Right wrist
                        FilteredCoordinates(:,5:6),...   % Left elbow
-                       FilteredCoordinates(:,7:8),...   % 
-                       (FilteredCoordinates(:, 15:16) + FilteredCoordinates(:,27:28)) / 2, ...
-                       FilteredCoordinates(:,29:30), ...
-                       FilteredCoordinates(:,31:32), ...
-                       FilteredCoordinates(:,35:36), ...
-                       FilteredCoordinates(:,37:38), ...
-                       FilteredCoordinates(:,17:18), ...
-                       FilteredCoordinates(:,19:20), ...
-                       FilteredCoordinates(:,23:24), ...
-                       FilteredCoordinates(:,25:26)] * 1e-3;
+                       FilteredCoordinates(:,7:8),...   % Left wrist
+                       (FilteredCoordinates(:, 15:16) + FilteredCoordinates(:,27:28)) / 2, ... % Midpoint between hips
+                       FilteredCoordinates(:,29:30), ... % Right knee
+                       FilteredCoordinates(:,31:32), ... % Right ankle
+                       FilteredCoordinates(:,35:36), ... % Right metatarsal
+                       FilteredCoordinates(:,37:38), ... % Right hallux
+                       FilteredCoordinates(:,17:18), ... % Left knee
+                       FilteredCoordinates(:,19:20), ... % Right ankle
+                       FilteredCoordinates(:,23:24), ... % Right metatarsal
+                       FilteredCoordinates(:,25:26)] * 1e-3; % Right hallux
 
 end

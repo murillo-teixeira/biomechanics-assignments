@@ -1,10 +1,11 @@
-function LabData = ReadProcessData(FileName)
+function [LabData, FilteredCoordinates] = ReadProcessData(FileName)
 
 global NBody;
 
 motion_data = table2array(readtable(FileName, 'FileType','text', 'VariableNamingRule','preserve'));
 time                = motion_data(:, 2);
-FrequencyInterval   = (0.5:0.01:10.0).';
+% Comentar com o professor o gráfico de frequências de corte
+FrequencyInterval   = (0.01:0.01:6.5).';
 
 header_info = readcell(FileName, ...
     'FileType','text', ...
@@ -16,21 +17,19 @@ no_frames   = cell2mat(header_info(1, 2));
 no_cameras  = cell2mat(header_info(2, 2));
 no_markers  = cell2mat(header_info(3, 2));
 f           = cell2mat(header_info(4, 2));
-FilteredCoordinates = zeros(length(motion_data(:, 1)), NBody * 3);
+FilteredCoordinates = zeros(length(motion_data(:, 1)), NBody * 2);
 CutOffFrequencies   = zeros(NBody * 3);
-i = 1;
-j = 1;
 
-while i < NBody * 3
-    CutOffFrequencies(j) = get_cutoff_frequency(motion_data(:, i + 3), FrequencyInterval, f);
+j = 1;
+for i = 3:59
+    if rem(i, 3) == 1
+        continue
+    end
+
+    CutOffFrequencies(j) = get_cutoff_frequency(motion_data(:, i), FrequencyInterval, f);
     wn = (2 * CutOffFrequencies(j)) / f;
     [Ab, Bb] = butter(2, wn, 'low');
-    FilteredCoordinates(:, j) = filtfilt(Ab, Bb, motion_data(:, i + 3));
-    if rem(i, 2) == 0
-        i = i + 2;
-    else
-        i = i + 1;
-    end
+    FilteredCoordinates(:, j) = filtfilt(Ab, Bb, motion_data(:, i));
     j = j + 1;
 end
 

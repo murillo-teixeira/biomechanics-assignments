@@ -3,6 +3,7 @@ function CutOffFrequency = get_cutoff_frequency(raw_data, FrequencyInterval, Sam
     N_f                 = length(FrequencyInterval);
     N                   = length(raw_data);
     Residuals           = zeros(length(FrequencyInterval), 1);
+    R_Squared_Threshold = 0.97;
 
     for i = 1:length(FrequencyInterval)
         wn = (2 * FrequencyInterval(i)) / SamplingFrequency;
@@ -14,12 +15,12 @@ function CutOffFrequency = get_cutoff_frequency(raw_data, FrequencyInterval, Sam
     for n = N_f-2:-1:1
         mdl = fitlm(n:N_f, Residuals(n:N_f));
         r_squared = mdl.Rsquared.Ordinary;
-        if r_squared <= 0.9
+        if r_squared <= R_Squared_Threshold
             break
         end
     end
     
-    if r_squared > 0.9
+    if r_squared > R_Squared_Threshold
         disp('Frequency not found')
     end
     
