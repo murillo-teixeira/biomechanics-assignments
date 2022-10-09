@@ -1,4 +1,5 @@
-function ComputeAverageLengths(inputArg1,inputArg2)
+function ComputeAverageLengths(LabData)
+    global NBody Body
     % Number of frames to evaluate 
     NFrames = size(LabData.Coordinates, 1); 
     
@@ -22,7 +23,7 @@ function ComputeAverageLengths(inputArg1,inputArg2)
      end 
     
     % Defines the average length 
-    Body(1).Length = mean(SegmentLength); 
+    Body(i).Length = mean(SegmentLength); 
     
     % End of the loop that goes through all bodies 
     end 

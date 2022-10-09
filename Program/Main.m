@@ -9,18 +9,20 @@ ReadInput('ProcessingFile.txt');
 % Reads the static data
 StaticData= ReadProcessData('../Material/Kinematics & Dynamics/trial_0001_static.tsv');
 
-plot_2d_data(StaticData, Body)
+plot_2d_data(StaticData, Body, 'static')
 
-%% 
 % Compute the average segment lengths
 ComputeAverageLengths(StaticData);
 
 % Reads the gait data
 GaitData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0010_Run.tsv');
-
+%%
 % computes the positions and angles of the body
 EvaluatePositions(GaitData);
 
+%%
+
+%%
 % Evaluates the drivers
 EvaluateDrivers(GaitData);
 
