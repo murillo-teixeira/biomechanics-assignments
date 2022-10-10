@@ -1,7 +1,8 @@
 function Position = EvaluatePositions(LabData)
     global NBody Body Jnt
     frame = 1;
-    Position = zeros(NBody, NBody * 2);
+    Position = zeros(LabData.Coordinates(:, 1)), NBody * 5);
+    for  n=1:length(LabData.Coordinates(:,1))
         for i=1:NBody
 
             csi_temp = [LabData.Coordinates(frame,2*(Body(i).pj)-1) - ... %x_i

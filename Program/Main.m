@@ -9,7 +9,7 @@ ReadInput('ProcessingFile.txt');
 % Reads the static data
 StaticData= ReadProcessData('../Material/Kinematics & Dynamics/trial_0001_static.tsv');
 
-plot_2d_data(StaticData, Body, 'static')
+plot_2d_data(LabData, Body, 'static')
 
 % Compute the average segment lengths
 ComputeAverageLengths(StaticData);

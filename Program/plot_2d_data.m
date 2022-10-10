@@ -1,7 +1,7 @@
 function plot_2d_data(LabData, Body, name)
     global NBody
     N = length(LabData.Coordinates(:,1));
-    for n = 1:N
+    for n = 1:1
         plot(0, 0)
         
         grid on;
@@ -13,7 +13,10 @@ function plot_2d_data(LabData, Body, name)
         for i = 1:NBody
             plot([LabData.Coordinates(n,2*(Body(i).pi)-1), LabData.Coordinates(n,2*(Body(i).pj)-1)], ...
                 [LabData.Coordinates(n,2*(Body(i).pi)), LabData.Coordinates(n,2*(Body(i).pj))], 'b')
+            plot(Body(i).x, Body(i).y, 'go')
         end
+
+
         ylim([0, 1.8])
         xlim([-2, 2])
         title('Running analysis', 'Interpreter', 'latex')
