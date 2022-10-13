@@ -22,7 +22,7 @@ function Position = EvaluatePositions(LabData)
             end
             A =[cos(theta), -sin(theta); sin(theta), cos(theta)];
             
-            Position(n, i:i+1) = [LabData.Coordinates(frame,2*(Body(j).pi)-1); LabData.Coordinates(frame,2*(Body(j).pi))] + ...
+            Position(n, i:i+1) = [LabData.Coordinates(n,2*(Body(j).pi)-1); LabData.Coordinates(n,2*(Body(j).pi))] + ...
                 A*[Body(j).Length*Body(j).PCoM; 0];
 
             if n == frame

@@ -1,11 +1,11 @@
-function [LabData, FilteredCoordinates] = ReadProcessData(FileName)
+function LabData = ReadProcessData(FileName)
 
-global NBody;
+global Times NBody;
 
 motion_data = table2array(readtable(FileName, 'FileType','text', 'VariableNamingRule','preserve'));
-time                = motion_data(:, 2);
+Times               = motion_data(:, 2);
 % Comentar com o professor o gráfico de frequências de corte
-FrequencyInterval   = (0.01:0.01:6.5).';
+FrequencyInterval   = (1.5:0.1:6.5).';
 
 header_info = readcell(FileName, ...
     'FileType','text', ...
@@ -18,21 +18,49 @@ no_cameras  = cell2mat(header_info(2, 2));
 no_markers  = cell2mat(header_info(3, 2));
 f           = cell2mat(header_info(4, 2));
 FilteredCoordinates = zeros(length(motion_data(:, 1)), NBody * 2);
-CutOffFrequencies   = zeros(NBody * 3);
+CutOffFrequencies   = zeros(NBody * 2);
 
 j = 1;
 for i = 3:59
     if rem(i, 3) == 1
         continue
     end
-
     CutOffFrequencies(j) = get_cutoff_frequency(motion_data(:, i), FrequencyInterval, f);
+    
     wn = (2 * CutOffFrequencies(j)) / f;
     [Ab, Bb] = butter(2, wn, 'low');
     FilteredCoordinates(:, j) = filtfilt(Ab, Bb, motion_data(:, i));
     j = j + 1;
 end
 
+plot(0, 0)
+        
+grid on;
+hold on;
+j=1;
+for i=1:2:NBody*2
+    b = bar(j, [CutOffFrequencies(i), CutOffFrequencies(i+1)]);
+    b(2).FaceColor = '#0072BD';
+    b(1).FaceColor = '#FF0000';
+    xtips1 = b(1).XEndPoints;
+    ytips1 = b(1).YEndPoints;
+    labels1 = string(b(1).YData);
+    text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
+    'VerticalAlignment','bottom')
+
+    xtips2 = b(2).XEndPoints;
+    ytips2 = b(2).YEndPoints;
+    labels2 = string(b(2).YData);
+    text(xtips2,ytips2,labels2,'HorizontalAlignment','center',...
+    'VerticalAlignment','bottom')
+
+    title('Choice of Cutoff Frequency', 'Interpreter', 'latex')
+    xlabel('Anatomical Point', 'Interpreter', 'latex')
+    ylabel('Cutoff Frequency [Hz]', 'Interpreter', 'latex')
+    legend({'Z coord','X coord'},'Location','southeast')
+    j=j+1;
+end
+hold off;
 
 % Organizes the data according to the definition of the biomechanical model % Notice that the coordinates from the lab are organized as follows: % 1 - Head; % 2 - L_Shoulder; % 3 - L_Elbow; % 4 - L_Wrist; % 5 - R_Shoulder % 6 - R_Elbow; % 7 - R_Wrist; % 8 - L_Hip; % 9 - L_Knee; % 10 - L_Ankle; % 11 - L_Heel; % 12 - L_Meta_V; is 13 - L_Toe_II; % 14 - R_Hip; % 15 - R_Knee % 16 - R_Ankle; % 17 - RHeel; % 18 - R_Meta_V; % 19 - R_Toe_II
 LabData.Coordinates = [FilteredCoordinates(:,1:2), ... % Head 

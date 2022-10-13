@@ -1,7 +1,7 @@
-function plot_2d_data(LabData, Body, name)
+function plot_2d_data(LabData, Body, name, Positions)
     global NBody
     N = length(LabData.Coordinates(:,1));
-    for n = 1:1
+    for n = 1:4:N
         plot(0, 0)
         
         grid on;
@@ -13,7 +13,7 @@ function plot_2d_data(LabData, Body, name)
         for i = 1:NBody
             plot([LabData.Coordinates(n,2*(Body(i).pi)-1), LabData.Coordinates(n,2*(Body(i).pj)-1)], ...
                 [LabData.Coordinates(n,2*(Body(i).pi)), LabData.Coordinates(n,2*(Body(i).pj))], 'b')
-            plot(Body(i).x, Body(i).y, 'go')
+             plot(Positions(n, (i-1)*3 + 1), Positions(n, (i-1)*3 + 2), 'go')
         end
 
 
