@@ -1,6 +1,6 @@
 function WriteModelInput(FileName)
 global NBody Body Jnt Pts
-DataToWrite = zeros(1 + NBody + Jnt.NRevolute, 10);
+DataToWrite = zeros(1 + NBody + Jnt.NRevolute + Jnt.NDriver, 10);
 
 % ... Initialize data
 Nline = 1;
@@ -30,5 +30,18 @@ for k = 1 : Jnt.NRevolute
     DataToWrite(Nline, 3:4) = Jnt.Revolute(k).spi * Body(Jnt.Revolute(k).i).Length; 
     DataToWrite(Nline, 5:6) = Jnt.Revolute(k).spj *Body(Jnt.Revolute(k).j).Length ;
 end 
+
+for k = 1 : Jnt.NDriver
+    Nline                   = Nline + 1;         
+    DataToWrite(Nline, 1)   = Jnt.Driver(k).type;
+    DataToWrite(Nline, 2)   = Jnt.Driver(k).i;         
+    DataToWrite(Nline, 3)   = Jnt.Driver(k).coortype;  
+    DataToWrite(Nline, 4)   = Jnt.Driver(k).j;     
+    DataToWrite(Nline, 5:6) = Jnt.Driver(k).spPi;
+    DataToWrite(Nline, 7:8) = Jnt.Driver(k).spPj;
+    DataToWrite(Nline, 9)   = Jnt.Driver(k).order;
+    DataToWrite(Nline, 10)  = Jnt.Driver(k).Filename; 
+end
+
 writematrix(DataToWrite, FileName, 'Delimiter','tab');
 end

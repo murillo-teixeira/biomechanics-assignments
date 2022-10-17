@@ -35,23 +35,23 @@ for k = 1 : Jnt.NRevolute
     Jnt.Revolute(k).spj = H(Nline, 5:6)';
 end 
 
-% ... Store information for Revolute Joints
+% ... Store information for Driver Constraints
 for k = 1 : Jnt.NDriver
     Nline                   = Nline + 1;
     Jnt.Driver(k).type      = H(Nline, 1);
     Jnt.Driver(k).i         = H(Nline, 2);
     Jnt.Driver(k).coortype  = H(Nline, 3);
     Jnt.Driver(k).j         = H(Nline, 4);
-    if(Jnt.Driver(k).type ~= 3 && ...
-            Jnt.Driver(k).type ~= 4 && ...
-            Jnt.Driver(k).type ~= 5)
-        disp('Type of driver not implemented');
-    else 
-        Jnt.Driver(k).spPi      = H(Nline, 5:6)';
-        Jnt.Driver(k).spPj      = H(Nline, 7:8)';
-        Jnt.Driver(k).order     = H(Nline, 9); % order of spline 
-        Jnt.Driver(k).Filename  = H(Nline, 10);
-    end
+%     if(Jnt.Driver(k).type ~= 3 && ...
+%             Jnt.Driver(k).type ~= 4 && ...
+%             Jnt.Driver(k).type ~= 5)
+%         disp('Type of driver not implemented');
+%     else 
+    Jnt.Driver(k).spPi      = H(Nline, 5:6)';
+    Jnt.Driver(k).spPj      = H(Nline, 7:8)';
+    Jnt.Driver(k).order     = H(Nline, 9); % order of spline 
+    Jnt.Driver(k).Filename  = H(Nline, 10);
+%     end
 end
 end
 
