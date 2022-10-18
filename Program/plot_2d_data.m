@@ -1,7 +1,7 @@
 function plot_2d_data(LabData, Body, name, Positions)
     global NBody
     N = length(LabData.Coordinates(:,1));
-    for n = 1:4:1
+    for n = 1:4:N
         plot(0, 0)
         
         grid on;

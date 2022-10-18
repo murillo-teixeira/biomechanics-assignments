@@ -38,6 +38,7 @@ label = {'Head', 'Left Shoulder', 'Left Elbow', 'Left Wrist', 'Right Shoulder', 
         'Left Heel', 'Left Meta V', 'Left Toe II', 'Right Hip', 'Right Knee', ...
         'Right Ankle', 'Right Heel', 'Right Meta V', 'Right Toe II'};
 hold off
+figure(2)
 CutOffFrequencies   = reshape(CutOffFrequencies, [], 2);
 b = bar(reordercats(categorical(label), label), CutOffFrequencies);
 b(2).FaceColor = '#0072BD';

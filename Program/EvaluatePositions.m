@@ -8,7 +8,7 @@ function Position = EvaluatePositions(LabData)
         for i=1:3:NBody*3
             csi_temp = [LabData.Coordinates(n,2*(Body(j).pj)-1) - ... %x_i
                         LabData.Coordinates(n,2*(Body(j).pi)-1), ...  %x_j
-                        LabData.Coordinates(n,2*(Body(j).pj)) - ...  %y_i
+                        LabData.Coordinates(n,2*(Body(j).pj)) - ...   %y_i
                         LabData.Coordinates(n,2*(Body(j).pi))];       %y_j
 
             csi_temp = csi_temp/norm(csi_temp);
@@ -38,6 +38,10 @@ function Position = EvaluatePositions(LabData)
 %             Body(i).eta_x = eta_temp(1);
 %             Body(i).eta_y = eta_temp(2);
         end
+    end
+
+    for i = i:NBody
+        Position(:, i) = unwrap(Position(:, i));
     end
 end
 
