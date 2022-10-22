@@ -13,12 +13,20 @@ StaticData= ReadProcessData("../Material/Kinematics & Dynamics/trial_0001_static
 ComputeAverageLengths(StaticData);
 disp("gait!")
 % Reads the gait data
-GaitData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0013_G2.tsv');
+GaitData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0013_G2.tsv', 'gait analysis');
+% %%
+% % computes the positions and angles of the body
+% Positions = EvaluatePositions(GaitData);
+% figure(1)
+% plot_2d_data(GaitData, Body, 'Gait', Positions)
 %%
+
+RunningData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0010_Run.tsv', 'running analysis');
+
 % computes the positions and angles of the body
-Positions = EvaluatePositions(GaitData);
+Positions = EvaluatePositions(RunningData);
 figure(1)
-plot_2d_data(GaitData, Body, 'static', Positions)
+plot_2d_data(RunningData, Body, 'Running', Positions)
 %%
 
 %%

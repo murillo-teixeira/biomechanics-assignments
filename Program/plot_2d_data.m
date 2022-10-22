@@ -19,9 +19,11 @@ function plot_2d_data(LabData, Body, name, Positions)
 
         ylim([0, 1.8])
         xlim([-2, 2])
-        title('Running analysis', 'Interpreter', 'latex')
+        title('Gait analysis', 'Interpreter', 'latex')
         xlabel('Position (m)', 'Interpreter', 'latex')
         ylabel('Position of markers (m)', 'Interpreter', 'latex')
+        fontname(gcf,"Times New Roman")
+        fontsize(gca,12,"pixels")
         pause(0.01)
         hold off;
         frame = getframe(gcf);
