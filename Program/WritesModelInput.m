@@ -1,5 +1,5 @@
 function WriteModelInput(FileName)
-global NBody Body Jnt Pts
+global NBody Body Jnt Pts Frc
 DataToWrite = zeros(1 + NBody + Jnt.NRevolute + Jnt.NDriver, 10);
 
 % ... Initialize data
@@ -41,6 +41,22 @@ for k = 1 : Jnt.NDriver
     DataToWrite(Nline, 7:8) = Jnt.Driver(k).spPj;
     DataToWrite(Nline, 9)   = Jnt.Driver(k).order;
     DataToWrite(Nline, 10)  = Jnt.Driver(k).Filename; 
+end
+
+%% ... Store information for force elements
+% Stores the data regarding the force plates
+for k = 1 : Frc.NVarForceAppl
+
+	% Bodies i and j
+	i = Frc.VarForceAppl(k).i;
+	
+	fprintf(fid, '%d %d %d\r\n', i, Frc.VarForceAppl(k).order, ...
+		Frc.VarForceAppl(k).Filename);
+	
+	% Writes the data to the files
+	dlmwrite(sprintf('VarForceAppl_%03d.txt', Frc.VarForceAppl(k).Filename), ...
+		Frc.VarForceAppl(k).Data, 'delimiter', '\t', 'precision', 16, ...
+		'newline', 'pc');
 end
 
 writematrix(DataToWrite, FileName, 'Delimiter','tab');
