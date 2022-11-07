@@ -4,6 +4,7 @@ global Times NBody SamplingFrequency;
 
 motion_data = table2array(readtable(FileName, 'FileType','text', 'VariableNamingRule','preserve'));
 Times               = motion_data(:, 2);
+Times               = Times - Times(1);
 % Comentar com o professor o gráfico de frequências de corte
 FrequencyInterval   = (1.0:0.1:6.5).';
 
@@ -39,11 +40,11 @@ label = {'Head', 'Left Shoulder', 'Left Elbow', 'Left Wrist', 'Right Shoulder', 
         'Left Heel', 'Left Meta V', 'Left Toe II', 'Right Hip', 'Right Knee', ...
         'Right Ankle', 'Right Heel', 'Right Meta V', 'Right Toe II'};
 hold off
-figure(2)
-CutOffFrequencies   = reshape(CutOffFrequencies, [], 2);
-b = bar(reordercats(categorical(label), label), CutOffFrequencies);
-b(2).FaceColor = '#0072BD';
-b(1).FaceColor = '#FF0000';
+% figure(2)
+% CutOffFrequencies   = reshape(CutOffFrequencies, [], 2);
+% b = bar(reordercats(categorical(label), label), CutOffFrequencies);
+% b(2).FaceColor = '#0072BD';
+% b(1).FaceColor = '#FF0000';
 %xtips1 = b(1).XEndPoints;
 %ytips1 = b(1).YEndPoints;
 %labels1 = string(b(1).YData);
@@ -56,12 +57,10 @@ b(1).FaceColor = '#FF0000';
 %text(xtips2,ytips2,labels2,'HorizontalAlignment','center',...
  %   'VerticalAlignment','bottom')
 
-title(join(['Cutoff frequencies for ',AnalyseType]), 'Interpreter', 'latex')
-xlabel('Coordinates Points', 'Interpreter', 'latex')
-ylabel('Cutoff Frequency [Hz]', 'Interpreter', 'latex')
-legend({'X coord','Z coord'},'Location','southeast')
-fontname(gcf,"Times New Roman")
-fontsize(gca,12,"pixels")
+% title(join(['Cutoff frequencies for ',AnalyseType]), 'Interpreter', 'latex')
+% xlabel('Coordinates Points', 'Interpreter', 'latex')
+% ylabel('Cutoff Frequency [Hz]', 'Interpreter', 'latex')
+% legend({'X coord','Z coord'},'Location','southeast')
 
 % Organizes the data according to the definition of the biomechanical model % Notice that the coordinates from the lab are organized as follows: % 1 - Head; % 2 - L_Shoulder; % 3 - L_Elbow; % 4 - L_Wrist; % 5 - R_Shoulder % 6 - R_Elbow; % 7 - R_Wrist; % 8 - L_Hip; % 9 - L_Knee; % 10 - L_Ankle; % 11 - L_Heel; % 12 - L_Meta_V; is 13 - L_Toe_II; % 14 - R_Hip; % 15 - R_Knee % 16 - R_Ankle; % 17 - RHeel; % 18 - R_Meta_V; % 19 - R_Toe_II
 LabData.Coordinates = [FilteredCoordinates(:,1:2), ... % Head 

@@ -8,12 +8,14 @@ function [t,y] = Integration_odes(y_init,solver,tspan)
 %
 %%   Access the global variables
 %
-global tend w
+global tend w tstart count
 %
 %... Create waitbar
 w       = waitbar(0,'Dynamic Analysis Progress');
+tstart    = tspan(1);
 tend    = tspan(end);
 %
+count = 0;
 %%... Integration of the equations of motion
 [t, y]  = feval(solver,@FuncEval,tspan,y_init);
 %

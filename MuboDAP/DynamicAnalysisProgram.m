@@ -11,7 +11,7 @@ clear all
 % Version 1.0     May 12, 2020
 %
 %% ... Access global memory
-global solver
+global solver tstep
 %
 %% ... Read the model input data and analysis profile
 [Filename] = ReadInputData();

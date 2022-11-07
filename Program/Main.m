@@ -1,7 +1,7 @@
 % Pre-processing of data from the Laboratory of Biomechanics of Lisbon
 clear;clc;
 
-global NBody Body Jnt Pts LabData Times Frc SamplingFrequency;
+global NBody Body Jnt Pts LabData Times Frc SamplingFrequency MuboKAP;
 
 % Reads input data for the biomechanical model
 ReadInput('ProcessingFile.txt');
@@ -16,15 +16,11 @@ ComputeAverageLengths(StaticData);
 % and inertia of the bodies
 ComputeBodyProperties();        % Second Part!
 
-disp("gait!")
 % Reads the gait data
 GaitData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0013_G2.tsv', 'gait analysis');
 % %%
 % computes the positions and angles of the body
 Positions = EvaluatePositions(GaitData);
-%figure(1)
-%plot_2d_data(GaitData, Body, 'Gait', Positions)
-%% Running Analysis 
 
 %RunningData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0010_Run.tsv', 'running analysis');
 
@@ -32,9 +28,7 @@ Positions = EvaluatePositions(GaitData);
 %Positions = EvaluatePositions(RunningData);
 %figure(1)
 %plot_2d_data(RunningData, Body, 'Running', Positions)
-%%
 
-%%
 % Evaluates the drivers
 EvaluateDrivers(Positions);
 

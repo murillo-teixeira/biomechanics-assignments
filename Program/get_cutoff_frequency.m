@@ -21,7 +21,7 @@ function CutOffFrequency = get_cutoff_frequency(raw_data, FrequencyInterval, Sam
     end
     
     if r_squared > R_Squared_Threshold
-        disp('Frequency not found')
+        disp('F')
     end
     
     coeffs = mdl.Coefficients.Estimate;

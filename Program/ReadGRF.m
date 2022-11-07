@@ -1,7 +1,7 @@
 function ReadGRF()
 				% 		... More things here!
 
-global Frc SamplingFrequency
+global Frc SamplingFrequency Times
 % Transforms the data from the local reference frame of the force plates to the
 % global reference frame of the laboratory. The output includes the 
 % magnitude of the forces in x,y, and z and the position of the center of

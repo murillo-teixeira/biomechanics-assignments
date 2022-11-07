@@ -15,10 +15,13 @@ function [yd] = FuncEval(t,y)
 %
 global Flag NCoordinates NCoord1
 global lambda acc
-global tend w
+global tend w tstart count
 %
 %% ... Update the Waitbar
-w = waitbar(t/tend,w,['time: ',num2str(t,'%10.5f')]);
+count = count + 1;
+disp(count)
+disp((t-tstart)/(tend-tstart))
+w = waitbar((t-tstart)/(tend-tstart),w,['time: ',num2str(t,'%10.5f')]);
 %
 %% ... Form the Jacobian matrix, Acceleration rhs, Pos and Vel constraints
 %

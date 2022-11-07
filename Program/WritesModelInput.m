@@ -1,5 +1,5 @@
 function WriteModelInput(FileName, FileToBeRead)
-global NBody Body Jnt Pts Frc SamplingFrequency
+global NBody Body Jnt Pts Frc SamplingFrequency Times MuboKAP
 DataToWrite = zeros(1 + NBody + Jnt.NRevolute + Jnt.NDriver ...
     + Frc.NVarForceAppl + 3, 10);
 
@@ -23,7 +23,7 @@ DataToWrite(Nline, 13) = Frc.NVarForceAppl;
 %% Reading from MuboKap
 MuboKAP = table2array(readtable(FileToBeRead, 'FileType','text', ...
     'VariableNamingRule','preserve'));
-
+MuboKAP(:, 1) = Times;
 for i= 1:NBody
     Nline = Nline + 1;
     DataToWrite(Nline, 1) = Body(i).x;

@@ -12,7 +12,7 @@ for j = 1 : 2
 	
 	% Filters the force data using a low pass filter with a cut-off
 	% frequency of 20 Hz
-	FilteredData = DoublePassLPFilter(ProcessedData(:,2), 20);
+	FilteredData = DoublePassLPFilter(ProcessedData(:,j), 20);
 
 	% the instants of time for which no contact existed will be 
 	% assigned a 0 N force
