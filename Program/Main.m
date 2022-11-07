@@ -1,7 +1,7 @@
 % Pre-processing of data from the Laboratory of Biomechanics of Lisbon
 clear;clc;
 
-global NBody Body Jnt Pts LabData Times Frc;
+global NBody Body Jnt Pts LabData Times Frc SamplingFrequency;
 
 % Reads input data for the biomechanical model
 ReadInput('ProcessingFile.txt');
@@ -20,10 +20,10 @@ disp("gait!")
 % Reads the gait data
 GaitData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0013_G2.tsv', 'gait analysis');
 % %%
- % computes the positions and angles of the body
- Positions = EvaluatePositions(GaitData);
- figure(1)
- plot_2d_data(GaitData, Body, 'Gait', Positions)
+% computes the positions and angles of the body
+Positions = EvaluatePositions(GaitData);
+%figure(1)
+%plot_2d_data(GaitData, Body, 'Gait', Positions)
 %% Running Analysis 
 
 %RunningData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0010_Run.tsv', 'running analysis');
@@ -39,7 +39,8 @@ GaitData = ReadProcessData('../Material/Kinematics & Dynamics/trial_0013_G2.tsv'
 EvaluateDrivers(Positions);
 
 % Process the ground reaction forces
-ReadGRF(GaitData.Frequency);        % Second Part!
+ReadGRF();        % Second Part!
 
 % Updates the data in the files to be read by the kinematic analysis
-WritesModelInput('..\MuboKap\BiomechanicalModelRunning.txt');
+WritesModelInput('..\MuboDAP\BiomechanicalModel.txt', ...
+    '..\MuboKAP\BiomechanicalModel.out');

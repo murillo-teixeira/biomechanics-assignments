@@ -1,6 +1,6 @@
 function LabData = ReadProcessData(FileName, AnalyseType)
 
-global Times NBody;
+global Times NBody SamplingFrequency;
 
 motion_data = table2array(readtable(FileName, 'FileType','text', 'VariableNamingRule','preserve'));
 Times               = motion_data(:, 2);
@@ -16,7 +16,7 @@ header_info = readcell(FileName, ...
 no_frames   = cell2mat(header_info(1, 2));
 no_cameras  = cell2mat(header_info(2, 2));
 no_markers  = cell2mat(header_info(3, 2));
-f           = cell2mat(header_info(4, 2));
+SamplingFrequency   = cell2mat(header_info(4, 2));
 FilteredCoordinates = zeros(length(motion_data(:, 1)), 19 * 2);
 CutOffFrequencies   = zeros(0, 19 * 2);
 
@@ -25,9 +25,10 @@ for i = 3:59
     if rem(i, 3) == 1
         continue
     end
-    CutOffFrequencies(j) = get_cutoff_frequency(motion_data(:, i), FrequencyInterval, f);
+    CutOffFrequencies(j) = get_cutoff_frequency(motion_data(:, i), ...
+        FrequencyInterval, SamplingFrequency);
     
-    wn = (2 * CutOffFrequencies(j)) / f;
+    wn = (2 * CutOffFrequencies(j)) / SamplingFrequency;
     [Ab, Bb] = butter(2, wn, 'low');
     FilteredCoordinates(:, j) = filtfilt(Ab, Bb, motion_data(:, i));
     j = j + 1;

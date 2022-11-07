@@ -1,7 +1,7 @@
-function ReadGRF(SamplingFrequency)
+function ReadGRF()
 				% 		... More things here!
 
-global Frc
+global Frc SamplingFrequency
 % Transforms the data from the local reference frame of the force plates to the
 % global reference frame of the laboratory. The output includes the 
 % magnitude of the forces in x,y, and z and the position of the center of
@@ -25,7 +25,7 @@ for i = 1 : 3
 		RawData(i).fp(:,4) * 1e-3, RawData(i).fp(:,6) * 1e-3];
 
 	% Filters the data
-	FilteredFPData = FilterForcePlateData(FPData, SamplingFrequency);
+	FilteredFPData = FilterForcePlateData(FPData);
 
 	% Saves the data in an output structure
 	Frc.VarForceAppl(i).Data = [Time', FilteredFPData(:,1), FilteredFPData(:,2), ...
