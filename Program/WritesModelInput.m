@@ -23,7 +23,7 @@ DataToWrite(Nline, 13) = Frc.NVarForceAppl;
 %% Reading from MuboKap
 MuboKAP = table2array(readtable(FileToBeRead, 'FileType','text', ...
     'VariableNamingRule','preserve'));
-MuboKAP(:, 1) = Times;
+MuboKAP(:, 1) = MuboKAP(:, 1) - MuboKAP(1, 1);
 for i= 1:NBody
     Nline = Nline + 1;
     DataToWrite(Nline, 1) = Body(i).x;

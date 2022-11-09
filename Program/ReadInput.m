@@ -1,6 +1,6 @@
 function  ReadInput(FileName)
 % Write the purpose of this function here % 
-global NBody Body Jnt Pts Frc
+global NBody Body Jnt Pts Frc H
 % Read the input file
 H = dlmread(FileName);
 

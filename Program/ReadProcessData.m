@@ -5,6 +5,7 @@ global Times NBody SamplingFrequency;
 motion_data = table2array(readtable(FileName, 'FileType','text', 'VariableNamingRule','preserve'));
 Times               = motion_data(:, 2);
 Times               = Times - Times(1);
+disp(Times)
 % Comentar com o professor o gráfico de frequências de corte
 FrequencyInterval   = (1.0:0.1:6.5).';
 

@@ -1,0 +1,27 @@
+1) Gait: 
+	- Comparação com Winter, 1987
+
+	a) GroundReactionsGait
+	- Observação: O gráfico é praticamente igual ao do Gait em Normal Cadence
+
+
+	b) MomentsGait
+	- Observação: Fora um comportamento anômalo da curva da última etapa do movimento, o comportamento é igual ao da literatura. Essa diferença pode ser explicada pela parada do gait percebida no Trabalho 1 ou por alguma outra falha na execução do movimento.
+
+
+	c) PowerGait
+	- Observação: Por conta do comportamento anômalo dos momentos, o PowerGait também o apresenta, mas fora isso as curvas estão próximas.
+
+2) Running
+	- Comparação com: Novacheck, 1998
+
+	a) GroundReactionsRunning
+	- Observação: As diferenças de amplitude e forma podem ser explicadas por uma má execução do movimento: Em vez de encostar todo o pé no chão, causando os dois picos referentes a (1) primeiro contato com o chão na parte de trás do pé e (2) impulso com a parte da frente do pé para andar, a voluntária correu apenas com a ponta dos pés.
+	- Observação 2: Não encontramos na literatura a força horizontal...
+
+	b) MomentsRunning
+	- Observação: O gráfico do momento do Hip está ligeiramente deslocado para cima, mas fora isso tudo de acordo com a literatura.
+
+	c) PowerRunning
+	- Comparação com: Novacheck, 1998
+	- Observação: Gráficos muito próximos, fora uma diferença pequena na amplitude.
